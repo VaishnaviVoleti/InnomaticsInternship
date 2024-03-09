@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Matcher</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0f0808;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            text-align: center;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+        h1, h2 {
+            color: #fff;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #bbb;
+            text-align: left;
+        }
+        textarea{
+           height: 200px;
+           width: calc(100% - 20px);
+           padding: 10px;
+           box-sizing: border-box;
+           margin-bottom: 10px;
+        }
+        input[type="text"],input[type="email"]{
+            width: calc(100% - 20px);
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #2ea4cc;
+            color: #fff;
+            cursor: pointer;
+            width: 20%; 
+            margin: 0 auto;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #333;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Regex Matcher</h1>
+        <form method="post" action="{{ url_for('home') }}">
+            <label for="test_string">Test String:</label>
+            <textarea style = "height: 200px; width: 100%;" id="test_string" name="test_string" required>{{ test_string }} </textarea>
+            <br>
+            <label for="regex_pattern">Regex Pattern:</label>
+            <input type="text" id="regex_pattern" name="regex_pattern" value="{{ regex_pattern }}" required>
+            <br>
+            <button type="submit">Match</button>
+        </form>
+
+        {% if matched_strings %}
+            <h2>Matched Strings:</h2>
+            <ul>
+                {% for match in matched_strings %}
+                    <li>{{ match }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+             <p style="color: chocolate;">   No matches found. </p>
+        {% endif %}
+
+        <hr>
+
+        <h2>Email Validation</h2>
+        <form method="post" action="{{ url_for('validate_email') }}">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Validate Email</button>
+        </form>
+    </div>
+</body>
+</html>
